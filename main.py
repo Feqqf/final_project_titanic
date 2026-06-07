@@ -5,7 +5,7 @@ from pathlib import Path
 # Добавляем корень проекта в PYTHONPATH, чтобы импорты работали из любой директории
 sys.path.append(str(Path(__file__).parent))
 
-from config import config
+from Config import config
 from training import run_training_pipeline
 
 logging.basicConfig(

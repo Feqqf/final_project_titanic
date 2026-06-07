@@ -32,13 +32,10 @@ def add_features(df: pd.DataFrame) -> pd.DataFrame:
         'Don':  'Mr',
     })
 
-
     df.loc[~df['Initial'].isin(['Mr', 'Miss', 'Mrs']), 'Initial'] = 'Other'
 
-    # =========================
     # ПРИЗНАК 2: Размер семьи
     # ПРИЗНАК 3: Статус одиночки
-    # =========================
 
     # Общее число родственников на борту (родители/дети + братья/сёстры/супруг)
     df['Family_Size'] = df['Parch'] + df['SibSp']
