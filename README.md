@@ -56,3 +56,20 @@
      ├─ metrics/               # CV-результаты (csv) и сводка (json).
      ├─ models/                # Сериализованные модели (.joblib).
      └─ submissions/           # Файлы для отправки на Kaggle (.csv).
+
+
+## Установка и запуск
+* git clone <url-твоего-репозитория>
+* cd final_project_titanic
+* python -m venv .venv
+* source .venv/bin/activate  # Для Windows: .venv\Scripts\activate
+
+## Установка зависимостей
+pip install -r requirements.txt
+
+## Подготовка данных
+
+Скачайте файлы train.csv и test.csv со страницы соревнования на Kaggle и поместите их в папку datas/.
+
+## Запуск пайплайна
+python main.py
