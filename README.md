@@ -73,15 +73,16 @@
 * python main.py
 
 ## Результат работы
-|№|	Модель|	Средняя accuracy (CV)|
-|1|	XGBoost|	0.8350|
-|2|	random_forest|	0.8317|
-|3|	catboost|	0.8305|
-|4|	NeuralNet|	0.8272|
-|5|	lightGBM|	0.8238|
-|6|	Lasso (L1)|	0.8137|
-|7|	Ridge (L2)|	0.8115|
-|8|	ElasticNet|	0.8092|
-|9|	decision_tree|	0.8081|
-|10|	KNN	0.8081|
-|11	|dummy_classifier|	0.6162|
+| № | Модель               | Средняя accuracy (CV) |
+|:--:|:---------------------|----------------------:|
+| 1  | XGBoost              | 0.8350                |
+| 2  | random_forest        | 0.8317                |
+| 3  | catboost             | 0.8305                |
+| 4  | NeuralNet            | 0.8272                |
+| 5  | lightGBM             | 0.8238                |
+| 6  | Lasso (L1)           | 0.8137                |
+| 7  | Ridge (L2)           | 0.8115                |
+| 8  | ElasticNet           | 0.8092                |
+| 9  | decision_tree        | 0.8081                |
+| 10 | KNN                  | 0.8081                |
+| 11 | dummy_classifier     | 0.6162                |
