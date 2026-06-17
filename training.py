@@ -18,20 +18,71 @@ except ImportError:
     OPTUNA_AVAILABLE = False
 
 def ensure_dir(path: str):
+    """
+    Создаёт все родительские директории для указанного пути, если они не существуют.
+
+    Используется как вспомогательная функция перед сохранением файлов.
+
+    Args:
+        path (str): Путь к файлу (не обязательно существующему). Директории
+            будут созданы на основе его родительской части.
+    """
     Path(path).parent.mkdir(parents=True, exist_ok=True)
 
 def save_dataframe(df: pd.DataFrame, path: str):
+    """
+    Сохраняет DataFrame в CSV-файл, автоматически создавая недостающие директории.
+
+    Args:
+        df (pd.DataFrame): Данные для сохранения.
+        path (str): Путь к выходному CSV-файлу.
+    """
     ensure_dir(path)
     df.to_csv(path, index=False)
     print(f"DataFrame saved: {path}")
 
 def save_json(data: dict, path: str):
+    """
+    Сохраняет словарь в JSON-файл с отступами для читаемости.
+
+    Args:
+        data (dict): Данные для сериализации.
+        path (str): Путь к выходному JSON-файлу.
+    """
     ensure_dir(path)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
     print(f"JSON saved: {path}")
 
 def run_training_pipeline(cfg=config):
+    """
+    Запускает полный пайплайн обучения моделей машинного обучения.
+
+    Основные этапы:
+        1. Загрузка данных (train и test) с указанием целевой колонки и идентификатора.
+        2. Предобработка признаков (через preprocess_features).
+        3. Инициализация базовых моделей (из get_models).
+        4. Опциональный подбор гиперпараметров с помощью Optuna (если включён в конфиге).
+        5. Кросс-валидация всех моделей (через evaluate_models).
+        6. Выбор лучшей модели по CV или фиксированной модели из конфига.
+        7. Обучение финальной модели на всех тренировочных данных.
+        8. Генерация предсказаний для тестовой выборки.
+        9. Сохранение результатов (метрики, сабмит, модель) в зависимости от флагов в конфиге.
+
+    Args:
+        cfg: Объект конфигурации (по умолчанию используется глобальный config).
+            Должен содержать атрибуты:
+                - paths: пути к данным, директориям для сохранения.
+                - columns: названия целевой колонки и id.
+                - cross_val_param: параметры кросс-валидации (n_folds, random_state).
+                - tuning: настройки тюнинга (enabled, models_to_tune).
+                - choose_model: выбор финальной модели.
+                - flags: флаги для сохранения (save_metrics, save_submission, save_model).
+
+    Returns:
+        None (все результаты сохраняются на диск).
+    """
+    
     print("Загрузка данных")
     X_train, y_train, X_test, train_ids, test_ids = load_data(
         path_to_train=cfg.paths.path_to_train,

@@ -7,7 +7,7 @@ from catboost import CatBoostClassifier
 from lightgbm import LGBMClassifier
 from xgboost import XGBClassifier
 from NeuralNet import ImprovedTitanicNet
-from config import config as cfg
+from Config import config as cfg
 
 
 def get_models(cfg) -> dict:

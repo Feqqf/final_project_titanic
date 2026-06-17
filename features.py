@@ -35,11 +35,10 @@ def add_features(df: pd.DataFrame) -> pd.DataFrame:
     df.loc[~df['Initial'].isin(['Mr', 'Miss', 'Mrs']), 'Initial'] = 'Other'
 
     # ПРИЗНАК 2: Размер семьи
-    # ПРИЗНАК 3: Статус одиночки
-
     # Общее число родственников на борту (родители/дети + братья/сёстры/супруг)
     df['Family_Size'] = df['Parch'] + df['SibSp']
-
+    
+    # ПРИЗНАК 3: Статус одиночки
     # Бинарный флаг: 1 — путешествует один, 0 — с семьёй
     df['Alone'] = np.where(df['Family_Size'] == 0, 1, 0)
 
